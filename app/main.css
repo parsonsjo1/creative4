@@ -1,0 +1,31 @@
+html {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	height: inherit;
+	background-image: url("./images/ep_naturalblack.png");
+	background-color: black;
+}
+
+#body-container {
+	height: inherit;
+}
+
+#body-container > .row {
+	height: inherit;
+}
+
+#canvas {
+	height: 500px;
+	width: 1000px;
+	background-color: white;
+}
+
+#pallette {
+	height: 100px;
+
+	background-color: white;
+
+}
