@@ -28,15 +28,11 @@ var draw = function(x, y, type) {
 	}
 };
 
-$('#body-container').on('mousedown mousemove mouseup', 'canvas', function(event) {
-  console.log(event);
-  console.log($('#canvas'));
-
+$('#body-container').on('mousemove', 'canvas', function(event) {
   var type = event.handleObj.type;
-  event.offsetX = event.pageX - $('#canvas').get(0).offsetLeft;
-  event.offsetY = event.pageY - $('#canvas').get(0).offsetTop;
-  var x = event.offsetX;
-  var y = event.offsetY;
+  var position = getMousePosition($('#canvas'), event);
+  var x = position.x;
+  var y = position.y;
   draw(x, y, type);
   socket.emit('drawClick', {
     x: x,
@@ -44,3 +40,13 @@ $('#body-container').on('mousedown mousemove mouseup', 'canvas', function(event)
     type: type
   });
 });
+
+function getMousePosition(canvas, evt) {
+    console.log(canvas.get(0).getBoundingClientRect());
+    var rect = canvas.get(0).getBoundingClientRect();
+    return {
+        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.get(0).width,
+        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.get(0).height
+    };
+}
+
