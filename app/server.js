@@ -11,6 +11,18 @@ app.get('/draw', function(req, res) {
 
 });
 
-app.listen(port);
+io.listen(app.listen(port));
+
+// Connection handler. A socket refers to individual clients
+io.sockets.on('connection', function(socket) {
+	socket.on('drawClick', function(data) {
+		console.log(data);
+		socket.broadcast.emit('draw', {
+			x: data.x,
+			y: data.y,
+			type: data.type
+		});
+	});
+});
 
 
