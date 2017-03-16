@@ -18,9 +18,9 @@ socket.on('draw', function(data) {
 
 //Draw Functionality
 var draw = function(x, y, type) {
-	if(type === "dragstart") {
+	if(type === "mousedown") {
 		context.beginPath();
-	} else if(type === "drag") {
+	} else if(type === "mousemove") {
 		context.lineTo(x,y);
 		return context.stroke();
 	} else {
@@ -28,17 +28,15 @@ var draw = function(x, y, type) {
 	}
 };
 
-$('#body-container').on('click', 'canvas', 'drag dragstart dragend', function(event) {
-  var offset, type, x, y;
-  type = event.handleObj.type;
-  offset = $(this).offset();
-  event.offsetX = event.layerX - offset.left;
-  event.offsetY = event.layerY - offset.top;
-  x = event.offsetX;
-  y = event.offsetY;
+$('#body-container').on('mousedown mousemove mouseup', 'canvas', function(event) {
   console.log(event);
-  console.log(x);
-  console.log(y);
+  console.log($('#canvas'));
+
+  var type = event.handleObj.type;
+  event.offsetX = event.pageX - $('#canvas').get(0).offsetLeft;
+  event.offsetY = event.pageY - $('#canvas').get(0).offsetTop;
+  var x = event.offsetX;
+  var y = event.offsetY;
   draw(x, y, type);
   socket.emit('drawClick', {
     x: x,
