@@ -24,8 +24,32 @@ body {
 }
 
 #pallette {
-	height: 100px;
-
+	height: 175px;
+	padding: 0;
 	background-color: white;
 
+}
+
+#red, #blue, #green {
+	height: 200px;
+	text-align: center;
+	padding: 0;
+
+	display: inline-block;
+}
+
+#red:hover, #blue:hover, #green:hover {
+	cursor: pointer;
+}
+
+#red {
+	background-color: red;
+}
+
+#blue {
+	background-color: blue;
+}
+
+#green {
+	background-color: green;
 }

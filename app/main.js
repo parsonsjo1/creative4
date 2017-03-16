@@ -42,7 +42,7 @@ $('#body-container').on('mousemove', 'canvas', function(event) {
 });
 
 function getMousePosition(canvas, evt) {
-    console.log(canvas.get(0).getBoundingClientRect());
+    //console.log(canvas.get(0).getBoundingClientRect());
     var rect = canvas.get(0).getBoundingClientRect();
     return {
         x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.get(0).width,
@@ -50,3 +50,14 @@ function getMousePosition(canvas, evt) {
     };
 }
 
+$('#red').click(function() {
+  context.strokeStyle = 'red';
+});
+
+$('#blue').click(function() {
+  context.strokeStyle = 'blue';
+});
+
+$('#green').click(function() {
+  context.strokeStyle = 'green';
+});
