@@ -10,7 +10,7 @@ context.lineWidth = 10;
 context.lineCap = "round";
 
 //Create connection
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect('ec2.mean.joshparsons.me:3000');
 //Listen for draw
 socket.on('draw', function(data) {
 	return draw(data.x, data.y, data.type);
