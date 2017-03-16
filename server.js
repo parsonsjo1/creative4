@@ -3,18 +3,14 @@ var io = require('socket.io');
 var app = express();
 var port = 3000;
 
-app.get('/', function(req, res) {
-	res.send('Hellow World!');
-});
+app.use(express.static(__dirname + "/app")); 
+app.use("/node_modules", express.static(__dirname + "/node_modules")); 
 
-app.get('/draw', function(req, res) {
-
-});
-
-io.listen(app.listen(port));
+var ios = io.listen(app.listen(port));
+console.log("listening on " + port);
 
 // Connection handler. A socket refers to individual clients
-io.sockets.on('connection', function(socket) {
+ios.sockets.on('connection', function(socket) {
 	socket.on('drawClick', function(data) {
 		console.log(data);
 		socket.broadcast.emit('draw', {
